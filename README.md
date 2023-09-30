@@ -1,6 +1,8 @@
 ### Olá, me chame de Hakari. 👍 
 ### Eu não sou um programador por natureza, este git é destinado a projetos que acho interessantes de compartilhar com as pessoas. Não me cobre clean code, rapaz. 💀
 
+- Atualmente eu estudo para RHCSA, AWS e JNCIA.
+
 ### Tecnologias que utilizo com maior frequência 
 ![OS](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 ![LG-1](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
