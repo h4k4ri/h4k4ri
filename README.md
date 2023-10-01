@@ -13,3 +13,6 @@
 
 ![STATS](https://github-readme-stats.vercel.app/api?username=H4K4RI&show_icons=true&theme=dracula)
 ![STATS-LANG](https://github-readme-stats.vercel.app/api/top-langs/?username=H4K4RI&theme=dracula)
+
+
+[![Ashutosh's github activity graph](https://github-readme-activity-graph.vercel.app/graph?username=h4k4ri&theme=dracula)](https://github.com/ashutosh00710/github-readme-activity-graph)
