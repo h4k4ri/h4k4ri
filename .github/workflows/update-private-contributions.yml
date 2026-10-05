@@ -1,0 +1,164 @@
+name: Atualizar contribuições privadas
+
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Atualizar totais privados
+        env:
+          GH_TOKEN: ${{ secrets.PROFILE_README_TOKEN }}
+          PROFILE_LOGIN: ${{ github.repository_owner }}
+        run: |
+          set -euo pipefail
+
+          if [[ -z "${GH_TOKEN}" ]]; then
+            echo "::warning::Configure o secret PROFILE_README_TOKEN para atualizar os dados privados."
+            exit 0
+          fi
+
+          year="$(date -u +%Y)"
+          since="${year}-01-01T00:00:00Z"
+          until="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          updated_at="$(date -u +%d/%m/%Y)"
+          private_commit_total=0
+          private_repo_count=0
+          private_repo_counts_file="$(mktemp)"
+
+          while IFS= read -r repository; do
+            [[ -z "$repository" ]] && continue
+
+            repository_commit_count="$(
+              gh api --paginate -X GET "repos/${repository}/commits" \
+                -f "author=${PROFILE_LOGIN}" \
+                -f "since=${since}" \
+                -f "until=${until}" \
+                -f per_page=100 \
+                --jq 'length' \
+                | awk '{ total += $1 } END { print total + 0 }'
+            )"
+
+            repository_name="${repository#*/}"
+            repository_commit_word="commits"
+            [[ "$repository_commit_count" -eq 1 ]] && repository_commit_word="commit"
+            printf '%s\t%s %s\n' "$repository_name" "$repository_commit_count" "$repository_commit_word" >> "$private_repo_counts_file"
+            private_repo_count=$((private_repo_count + 1))
+            private_commit_total=$((private_commit_total + repository_commit_count))
+          done < <(
+            gh api --paginate -X GET user/repos \
+              -f visibility=all \
+              -f affiliation=owner,collaborator,organization_member \
+              -f per_page=100 \
+              --jq '.[] | select(.private == true) | .full_name'
+          )
+
+          query='query($login:String!, $from:DateTime!, $to:DateTime!) { user(login:$login) { contributionsCollection(from:$from,to:$to) { restrictedContributionsCount } } }'
+          private_contribution_total="$(
+            gh api graphql \
+              -f query="$query" \
+              -F "login=${PROFILE_LOGIN}" \
+              -F "from=${since}" \
+              -F "to=${until}" \
+              --jq '.data.user.contributionsCollection.restrictedContributionsCount // 0'
+          )"
+
+          commit_word="commit"
+          [[ "$private_commit_total" -ne 1 ]] && commit_word="commits"
+          contribution_word="contribuição privada"
+          [[ "$private_contribution_total" -ne 1 ]] && contribution_word="contribuições privadas"
+
+          block_file="$(mktemp)"
+          output_file="$(mktemp)"
+          card_output_file="$(mktemp)"
+          trap 'rm -f "$block_file" "$output_file" "$card_output_file" "$private_repo_counts_file"' EXIT
+
+          printf '%s\n' \
+            '<!-- PRIVATE_COMMITS:START -->' \
+            "> **${private_commit_total} ${commit_word}** em repositórios privados em ${year} · **${private_contribution_total} ${contribution_word}**" \
+            '>' \
+            "> Atualizado em ${updated_at}." \
+            '<!-- PRIVATE_COMMITS:END -->' > "$block_file"
+
+          if ! grep -q '<!-- PRIVATE_COMMITS:START -->' README.md || \
+             ! grep -q '<!-- PRIVATE_COMMITS:END -->' README.md; then
+            echo "Marcadores PRIVATE_COMMITS não encontrados em README.md." >&2
+            exit 1
+          fi
+
+          awk -v block_file="$block_file" '
+            BEGIN {
+              while ((getline line < block_file) > 0) {
+                replacement = replacement (replacement ? "\n" : "") line
+              }
+              close(block_file)
+            }
+            /<!-- PRIVATE_COMMITS:START -->/ {
+              print replacement
+              in_block = 1
+              next
+            }
+            /<!-- PRIVATE_COMMITS:END -->/ {
+              in_block = 0
+              next
+            }
+            !in_block { print }
+          ' README.md > "$output_file"
+
+          chmod 0644 "$output_file"
+          mv "$output_file" README.md
+
+          awk -v counts_file="$private_repo_counts_file" \
+              -v repository_total="$private_repo_count" \
+              -v contribution_total="$private_contribution_total" \
+              -v commit_total="$private_commit_total" \
+              -v commit_word="$commit_word" '
+            BEGIN {
+              while ((getline line < counts_file) > 0) {
+                split(line, fields, "\t")
+                commit_count[fields[1]] = fields[2]
+              }
+              close(counts_file)
+            }
+            {
+              for (name in commit_count) {
+                if (index($0, ">" name "</text>") > 0) {
+                  print
+                  if (getline next_line > 0) {
+                    sub(/>[^<]*</, ">" commit_count[name] "<", next_line)
+                    print next_line
+                  }
+                  next
+                }
+              }
+              if (index($0, "<text x=\"36\" y=\"320\"") > 0) {
+                sub(/>[^<]*</, ">" repository_total " repositories · " contribution_total " contributions · " commit_total " " commit_word " this year<")
+              }
+              print
+            }
+          ' assets/private-projects.svg > "$card_output_file"
+
+          chmod 0644 "$card_output_file"
+          mv "$card_output_file" assets/private-projects.svg
+
+      - name: Publicar alteração
+        run: |
+          if git diff --quiet -- README.md; then
+            echo "Nenhuma alteração no README."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "chore: atualiza contribuições privadas"
+          git push

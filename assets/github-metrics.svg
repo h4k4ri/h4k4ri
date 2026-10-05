@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="430" viewBox="0 0 900 430" role="img" aria-labelledby="title desc">
+  <title id="title">Hakari GitHub metrics</title>
+  <desc id="desc">Card de métricas do GitHub em preto, amarelo e cinza.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0d0f" />
+      <stop offset="0.55" stop-color="#111827" />
+      <stop offset="1" stop-color="#374151" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f2c94c" />
+      <stop offset="1" stop-color="#ffe89a" />
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <style>
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .label { fill: #9ca3af; font-size: 14px; letter-spacing: 2px; }
+      .value { fill: #f2c94c; font-size: 34px; font-weight: 700; }
+      .small { fill: #d1d5db; font-size: 16px; }
+    </style>
+  </defs>
+
+  <rect x="12" y="12" width="876" height="406" rx="24" fill="#111827" stroke="#f2c94c" stroke-width="3" />
+  <path d="M36 104H864" stroke="#4b5563" />
+  <path d="M36 105H270" stroke="#f2c94c" stroke-width="3" />
+
+  <text x="42" y="60" class="mono" fill="#f2c94c" font-size="26" font-weight="700">HAKARI // GITHUB METRICS</text>
+  <text x="42" y="86" class="mono" fill="#d1d5db" font-size="15">security · systems · open source</text>
+  <text x="810" y="68" class="mono" fill="#9ca3af" font-size="13" text-anchor="end">LIVE PROFILE</text>
+  <circle cx="838" cy="62" r="8" fill="#f2c94c" filter="url(#glow)" />
+
+  <rect x="42" y="140" width="252" height="116" rx="16" fill="#0b0d0f" stroke="#4b5563" />
+  <text x="64" y="174" class="mono label" fill="#9ca3af">PUBLIC PROJECTS</text>
+  <text x="64" y="222" class="mono value" fill="#f2c94c">2</text>
+  <text x="132" y="220" class="mono small" fill="#d1d5db">Orion · Yatta</text>
+
+  <rect x="324" y="140" width="252" height="116" rx="16" fill="#0b0d0f" stroke="#4b5563" />
+  <text x="346" y="174" class="mono label" fill="#9ca3af">PRIVATE ACTIVITY</text>
+  <text x="346" y="222" class="mono value" fill="#f2c94c">55</text>
+  <text x="414" y="220" class="mono small" fill="#d1d5db">contribuições</text>
+
+  <rect x="606" y="140" width="252" height="116" rx="16" fill="#0b0d0f" stroke="#4b5563" />
+  <text x="628" y="174" class="mono label" fill="#9ca3af">STACK SIGNAL</text>
+  <text x="628" y="214" class="mono small" fill="#d1d5db">Go · React · Rust</text>
+  <text x="628" y="238" class="mono small" fill="#d1d5db">Python · Shell · AWS</text>
+
+  <text x="42" y="306" class="mono label" fill="#9ca3af">CURRENT LOADOUT</text>
+  <rect x="42" y="326" width="816" height="10" rx="5" fill="#374151" />
+  <rect x="42" y="326" width="612" height="10" rx="5" fill="#f2c94c" />
+  <text x="42" y="372" class="mono small" fill="#d1d5db">OSCP / CPTS training mode</text>
+  <text x="858" y="372" class="mono small" fill="#d1d5db" text-anchor="end">BUILD · BREAK · LEARN · REPEAT</text>
+</svg>

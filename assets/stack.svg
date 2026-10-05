@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420" role="img" aria-labelledby="title desc">
+  <title id="title">Stack de tecnologias de Hakari</title>
+  <desc id="desc">Card preto e amarelo com as tecnologias Linux, Python, Rust, Go, React, Shell, SQLite e AWS.</desc>
+  <defs>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+    </filter>
+    <style>.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }</style>
+  </defs>
+
+  <rect x="10" y="10" width="700" height="400" rx="22" fill="#111827" stroke="#f2c94c" stroke-width="3" />
+  <text x="36" y="56" class="mono" fill="#f2c94c" font-size="24" font-weight="700">STACK // LOADOUT</text>
+  <text x="36" y="82" class="mono" fill="#9ca3af" font-size="14">tools for breaking, building and learning</text>
+  <circle cx="664" cy="50" r="8" fill="#f2c94c" filter="url(#glow)" />
+  <path d="M36 104H684" stroke="#4b5563" />
+
+  <rect x="36" y="128" width="312" height="62" rx="13" fill="#0b0d0f" stroke="#374151" />
+  <circle cx="62" cy="159" r="10" fill="#f2c94c" />
+  <text x="84" y="157" class="mono" fill="#f2c94c" font-size="17" font-weight="700">Linux</text>
+  <text x="84" y="178" class="mono" fill="#9ca3af" font-size="12">systems / ops</text>
+
+  <rect x="372" y="128" width="312" height="62" rx="13" fill="#0b0d0f" stroke="#374151" />
+  <circle cx="398" cy="159" r="10" fill="#9ca3af" />
+  <text x="420" y="157" class="mono" fill="#f2c94c" font-size="17" font-weight="700">Python</text>
+  <text x="420" y="178" class="mono" fill="#9ca3af" font-size="12">automation / tooling</text>
+
+  <rect x="36" y="204" width="312" height="62" rx="13" fill="#0b0d0f" stroke="#374151" />
+  <circle cx="62" cy="235" r="10" fill="#6b7280" />
+  <text x="84" y="233" class="mono" fill="#f2c94c" font-size="17" font-weight="700">Rust</text>
+  <text x="84" y="254" class="mono" fill="#9ca3af" font-size="12">low-level / performance</text>
+
+  <rect x="372" y="204" width="312" height="62" rx="13" fill="#0b0d0f" stroke="#374151" />
+  <circle cx="398" cy="235" r="10" fill="#f2c94c" />
+  <text x="420" y="233" class="mono" fill="#f2c94c" font-size="17" font-weight="700">Go</text>
+  <text x="420" y="254" class="mono" fill="#9ca3af" font-size="12">backend / services</text>
+
+  <rect x="36" y="280" width="312" height="62" rx="13" fill="#0b0d0f" stroke="#374151" />
+  <circle cx="62" cy="311" r="10" fill="#9ca3af" />
+  <text x="84" y="309" class="mono" fill="#f2c94c" font-size="17" font-weight="700">React</text>
+  <text x="84" y="330" class="mono" fill="#9ca3af" font-size="12">frontend / interfaces</text>
+
+  <rect x="372" y="280" width="312" height="62" rx="13" fill="#0b0d0f" stroke="#374151" />
+  <circle cx="398" cy="311" r="10" fill="#6b7280" />
+  <text x="420" y="309" class="mono" fill="#f2c94c" font-size="17" font-weight="700">Shell</text>
+  <text x="420" y="330" class="mono" fill="#9ca3af" font-size="12">cli / automation</text>
+
+  <text x="36" y="378" class="mono" fill="#d1d5db" font-size="13">SQLite · AWS</text>
+  <text x="684" y="378" class="mono" fill="#d1d5db" font-size="13" text-anchor="end">OSCP / CPTS training mode</text>
+</svg>

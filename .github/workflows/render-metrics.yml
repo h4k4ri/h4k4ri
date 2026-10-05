@@ -1,0 +1,50 @@
+name: Renderizar GitHub metrics
+
+on:
+  schedule:
+    - cron: "37 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Gerar card de métricas
+        uses: lowlighter/metrics@latest
+        with:
+          filename: assets/github-metrics.svg
+          token: ${{ secrets.PROFILE_README_TOKEN || github.token }}
+          committer_token: ${{ github.token }}
+          committer_message: "chore: atualiza github metrics [skip ci]"
+          user: h4k4ri
+          base: header, activity, repositories
+          config_order: base.header, base.activity, languages, isocalendar, base.repositories
+          config_display: large
+          config_timezone: America/Sao_Paulo
+          config_padding: 8, 8
+          plugin_languages: yes
+          plugin_languages_sections: most-used, recently-used
+          plugin_languages_details: percentage, bytes-size
+          plugin_languages_limit: 6
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: half-year
+          plugin_habits: yes
+          plugin_habits_facts: yes
+          plugin_habits_charts: yes
+          plugin_repositories: yes
+          plugin_repositories_pinned: 4
+          retries: 3
+          retries_output_action: 3
+          extras_css: |
+            h2, h3 {
+              color: #F2C94C !important;
+            }
+            a {
+              color: #F2C94C !important;
+            }
+            svg {
+              background: #0B0D0F !important;
+            }

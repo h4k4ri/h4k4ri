@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="360" viewBox="0 0 720 360" role="img" aria-labelledby="title desc">
+  <title id="title">Projetos privados de Hakari</title>
+  <desc id="desc">Card preto e amarelo com os projetos privados de Hakari.</desc>
+  <defs>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+    </filter>
+    <style>.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }</style>
+  </defs>
+  <rect x="10" y="10" width="700" height="340" rx="22" fill="#111827" stroke="#f2c94c" stroke-width="3" />
+  <text x="36" y="56" class="mono" fill="#f2c94c" font-size="24" font-weight="700">PRIVATE PROJECTS</text>
+  <text x="36" y="82" class="mono" fill="#9ca3af" font-size="14">protected work / private repos</text>
+  <circle cx="664" cy="50" r="8" fill="#f2c94c" filter="url(#glow)" />
+  <path d="M36 104H684" stroke="#4b5563" />
+
+  <rect x="36" y="128" width="648" height="46" rx="12" fill="#0b0d0f" stroke="#374151" />
+  <text x="58" y="157" class="mono" fill="#f2c94c" font-size="16">mirai-school</text>
+  <text x="660" y="157" class="mono" fill="#9ca3af" font-size="13" text-anchor="end">0 commits</text>
+
+  <rect x="36" y="184" width="648" height="46" rx="12" fill="#0b0d0f" stroke="#374151" />
+  <text x="58" y="213" class="mono" fill="#f2c94c" font-size="16">ProxHub</text>
+  <text x="660" y="213" class="mono" fill="#9ca3af" font-size="13" text-anchor="end">1 commit</text>
+
+  <rect x="36" y="240" width="312" height="46" rx="12" fill="#0b0d0f" stroke="#374151" />
+  <text x="58" y="269" class="mono" fill="#f2c94c" font-size="16">psycho</text>
+  <text x="324" y="269" class="mono" fill="#9ca3af" font-size="13" text-anchor="end">0 commits</text>
+
+  <rect x="372" y="240" width="312" height="46" rx="12" fill="#0b0d0f" stroke="#374151" />
+  <text x="394" y="269" class="mono" fill="#f2c94c" font-size="16">tablegame_firebase</text>
+  <text x="660" y="269" class="mono" fill="#9ca3af" font-size="13" text-anchor="end">0 commits</text>
+
+  <text x="36" y="320" class="mono" fill="#d1d5db" font-size="13">4 repositories · 55 contributions · 1 commit this year</text>
+</svg>
